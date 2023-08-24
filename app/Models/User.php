@@ -48,8 +48,4 @@ class User extends Authenticatable
     ];
 
     // protected $guarded = [];
-
-    public function friend() {
-        return $this->hasMany(Friend::class);
-    }
 }
