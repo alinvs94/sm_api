@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'city',
+        'country',
+        'school_city',
+        'picture',
     ];
 
     /**
@@ -43,5 +47,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $guarded = [];
+    // protected $guarded = [];
+
+    public function friend() {
+        return $this->hasMany(Friend::class);
+    }
 }

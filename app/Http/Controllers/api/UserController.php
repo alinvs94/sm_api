@@ -3,13 +3,21 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ValidateUser;
 use App\Models\User;
+use Illuminate\Http\Client\ResponseSequence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function register(Request $request)
+    public function index()
+    {
+        $users = User::all();
+        return response()->json($users,200);
+
+    }
+    public function register(ValidateUser $request)
     {
         $user = User::create($request->all());
 
@@ -44,5 +52,11 @@ class UserController extends Controller
     public function update(Request $request)
     {
 
+    }
+
+    public function getCurrentUser()
+    {
+        $user = auth('sanctum')->user();
+        return response()->json($user, 200);
     }
 }
