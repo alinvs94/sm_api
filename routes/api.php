@@ -26,6 +26,7 @@ Route::post('/users/login', [UserController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/getCurrentUser', [UserController::class, 'getCurrentUser']);
+    Route::get('/users/getUser', [UserController::class, 'getUser']);
     Route::post('/users/logout', [UserController::class, 'logout']);
     Route::get('/users/index', [UserController::class, 'index']);
     Route::post('/friends/add', [FriendController::class, 'addFriend']);

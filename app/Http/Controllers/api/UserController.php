@@ -49,9 +49,10 @@ class UserController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function getUser(Request $request)
     {
-
+        $user = User::where('email', $request->email)->first();
+        return response()->json($user,200);
     }
 
     public function getCurrentUser()
