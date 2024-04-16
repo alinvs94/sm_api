@@ -15,7 +15,7 @@ class FriendController extends Controller
     {
         $friends = Friend::where('user_id', $userId)->get();
 
-        return response()->json($friends, 201);
+        return response()->json($friends, 200);
     }
 
     /**

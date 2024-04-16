@@ -39,7 +39,7 @@ class UserController extends Controller
 
         $token = $user->createToken('token_auth');
 
-        return response()->json($token, 200);
+        return response()->json($token, 201);
     }
 
     public function logout(Request $request)
