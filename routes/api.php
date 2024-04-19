@@ -31,5 +31,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/index', [UserController::class, 'index']);
     Route::post('/friends/add', [FriendController::class, 'addFriend']);
     Route::get('/friends/list/{id}', [FriendController::class, 'friendsList']);
-    Route::get('/friends/remove', [FriendController::class, 'removeFriend']);
+    Route::post('/friends/remove', [FriendController::class, 'removeFriend']);
 });
