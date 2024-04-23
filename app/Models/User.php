@@ -47,5 +47,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // protected $guarded = [];
+    public function friendsList()
+    {
+        return $this->hasMany(Friend::class);
+    }
 }
