@@ -21,15 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/users/register', [UserController::class, 'register']);
-Route::post('/users/login', [UserController::class, 'login']);
+Route::post('/user/register', [UserController::class, 'register']);
+Route::post('/user/login', [UserController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/users/getCurrentUser', [UserController::class, 'getCurrentUser']);
-    Route::get('/users/getUser', [UserController::class, 'getUser']);
-    Route::post('/users/logout', [UserController::class, 'logout']);
-    Route::get('/users/index', [UserController::class, 'index']);
-    Route::post('/friends/add', [FriendController::class, 'addFriend']);
-    Route::get('/friends/list/{id}', [FriendController::class, 'friendsList']);
-    Route::post('/friends/remove', [FriendController::class, 'removeFriend']);
+    Route::get('/user/getCurrentUser', [UserController::class, 'getCurrentUser']);
+    Route::get('/user/getUser', [UserController::class, 'getUser']);
+    Route::post('/user/logout', [UserController::class, 'logout']);
+    Route::get('/user/index', [UserController::class, 'index']);
+    Route::post('/friend/add', [FriendController::class, 'addFriend']);
+    Route::get('/friend/{id}/list', [FriendController::class, 'friendsList']);
+    Route::post('/friend/remove', [FriendController::class, 'removeFriend']);
 });
