@@ -51,8 +51,17 @@ class UserController extends Controller
 
     public function getUser(Request $request)
     {
-        $user = User::where('email', $request->email)->first();
-        return response()->json($user, 200);
+        $user = User::where('id', $request->id)->first();
+        $userCopy = User::where('id', $request->id)->first();
+        $friends_list = [];
+
+        foreach ($user->friendsList as $friendUser) {
+            $friend = User::where("id", $friendUser->friend_id)->first();
+            array_push($friends_list, $friend);
+        }
+        ;
+        $userCopy->friends_list = $friends_list;
+        return response()->json($userCopy, 200);
     }
 
     public function getCurrentUser()
