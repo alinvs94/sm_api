@@ -58,7 +58,16 @@ class UserController extends Controller
     public function getCurrentUser()
     {
         $user = auth('sanctum')->user();
-        $user->friendsList;
-        return response()->json($user, 200);
+        $loggedUser = User::where("id", $user->id)->first();
+        $friends_list = [];
+
+        foreach ($user->friendsList as $friendUser) {
+            $friend = User::where("id", $friendUser->friend_id)->first();
+            array_push($friends_list, $friend);
+        }
+        ;
+
+        $loggedUser->friends_list = $friends_list;
+        return response()->json($loggedUser, 200);
     }
 }
