@@ -10,7 +10,7 @@ class FriendController extends Controller
 {
     public function addFriend(Request $request)
     {
-        $checkFriend = Friend::where('email', $request->email)->where('user_id', $request->email)->first();
+        $checkFriend = Friend::where('user_id', $request->user_id)->where('friend_id', $request->friend_id)->first();
         if (!$checkFriend) {
             $addFriend = Friend::create($request->all());
             return response()->json($addFriend, 201);
@@ -21,7 +21,7 @@ class FriendController extends Controller
 
     public function removeFriend(Request $request)
     {
-        $friend = Friend::where('email', $request->email)->where('user_id', $request->user_id)->first();
+        $friend = Friend::where('user_id', $request->user_id)->where('friend_id', $request->friend_id)->first();
         if ($friend) {
             $friend->delete();
             return response()->json("Friend deleted", 200);
