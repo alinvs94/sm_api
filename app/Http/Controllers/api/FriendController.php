@@ -11,7 +11,8 @@ class FriendController extends Controller
     public function addFriend(Request $request)
     {
         $checkFriend = Friend::where('user_id', $request->user_id)->where('friend_id', $request->friend_id)->first();
-        if (!$checkFriend) {
+        $checkFriendAgain = Friend::where('user_id', $request->friend_id)->where('friend_id', $request->user_id)->first();
+        if (!$checkFriend && !$checkFriendAgain) {
             $addFriend = Friend::create($request->all());
             return response()->json($addFriend, 201);
         }
