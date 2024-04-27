@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidateUser;
+use App\Models\Friend;
 use App\Models\User;
 use Illuminate\Http\Client\ResponseSequence;
 use Illuminate\Http\Request;
@@ -75,6 +76,12 @@ class UserController extends Controller
             array_push($friends_list, $friend);
         }
         ;
+
+        $commonFriend = Friend::where('friend_id', $user->id)->first();
+        if ($commonFriend) {
+            $searchCommondFriend = User::where("id", $commonFriend->user_id)->first();
+            array_unshift($friends_list, $searchCommondFriend);
+        }
 
         $loggedUser->friends_list = $friends_list;
         return response()->json($loggedUser, 200);
