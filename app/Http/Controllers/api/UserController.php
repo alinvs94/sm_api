@@ -77,13 +77,18 @@ class UserController extends Controller
         }
         ;
 
-        $commonFriend = Friend::where('friend_id', $user->id)->first();
-        if ($commonFriend) {
-            $searchCommondFriend = User::where("id", $commonFriend->user_id)->first();
-            array_unshift($friends_list, $searchCommondFriend);
+        $commonFriendsArray = Friend::where('friend_id', $user->id)->get();
+        if ($commonFriendsArray) {
+            foreach ($commonFriendsArray as $commonFriend) {
+                $searchCommondFriend = User::where("id", $commonFriend->user_id)->first();
+                array_unshift($friends_list, $searchCommondFriend);
+            }
         }
+        $newCollection = collect($friends_list);
+        $orderedCollection = $newCollection->sortBy("name");
+        $collectionToArray = $orderedCollection->values();
 
-        $loggedUser->friends_list = $friends_list;
+        $loggedUser->friends_list = $collectionToArray;
         return response()->json($loggedUser, 200);
     }
 }
